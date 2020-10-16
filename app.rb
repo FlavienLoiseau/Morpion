@@ -7,10 +7,11 @@ require 'board'
 require 'human_player'
 
 def introduction
-  puts "  -------------------------------------------------
-  |Bienvenue sur 'MORPION X VS O' !               |
-  |Le but du jeu est d'être le dernier survivant !|
-  -------------------------------------------------".light_green
+  puts "
+  ┌─────────────────────────────────────────┐
+  │    Bienvenue sur 'MORPION X VS O' !     │
+  │ Le but du jeu est d'aligner trois pions │
+  └─────────────────────────────────────────┘".light_green
 
   # demande le nom de chaque joueur
   puts "

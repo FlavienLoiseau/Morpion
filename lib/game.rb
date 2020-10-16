@@ -28,7 +28,7 @@ class Game
     puts "-------------------------"
     puts "#{player.name}, où veux-tu jouer ?"
     print "> "
-    entry = gets.chomp
+    entry = gets.chomp.upcase
     line = entry.chars[0].ord - 65
     column = (entry.chars[1].to_i) -1
 
