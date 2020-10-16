@@ -5,8 +5,8 @@ class Game
     # initialisation du plateau
     @board = Board.new
     # initialisation des joueurs humains
-    @player1 = HumanPlayer.new(player1, "X")
-    @player2 = HumanPlayer.new(player2, "O")
+    @player1 = HumanPlayer.new(player1, "X".light_red)
+    @player2 = HumanPlayer.new(player2, "O".light_cyan)
   end
 
   # fonctionnement normal d'un tour de jeu
@@ -28,12 +28,12 @@ class Game
     puts "-------------------------"
     puts "#{player.name}, où veux-tu jouer ?"
     print "> "
-    entry = gets.chomp.chars
-    line = entry[0].ord - 65
-    column = (entry[1].to_i) -1
+    entry = gets.chomp
+    line = entry.chars[0].ord - 65
+    column = (entry.chars[1].to_i) -1
 
-    # on vérifie que la case ne soit pas pleine
-    if board.is_box_full(column, line)
+    # on vérifie que le joueur ait entré une bonne case et qu'elle ne soit pas pleine
+    if ["A1","B1","C1","A2","B2","C2","A3","B3","C3"].none?(entry) || board.is_box_full(column, line)
       return "erreur"
     end
 
@@ -49,13 +49,17 @@ class Game
 
   def end_game(winner)
 
+    # nettoie et affiche le résultat
+    system "clear"
+    @board.display
+
     # affichage du vainqueur
     puts ""
-    puts "!!!"
+    puts "!!!".light_green
     if winner == "match_nul"
-      puts "Vous n'avez pas réussi à vous départager, match nul"
+      puts "Vous n'avez pas réussi à vous départager, match nul".light_green
     else
-      puts "#{winner.name} a gagné, bravo à lui/elle"
+      puts "#{winner.name} a gagné, bravo à lui/elle".light_green
     end
   
     # est-ce qu'on relance une partie ?
@@ -63,7 +67,7 @@ class Game
     puts "Voulez-vous relancer une partie ?"
     puts "O: oui / N: non"
     print "> "
-    choice = gets.chomp
+    choice = gets.chomp.upcase
     if choice == "O"
       my_game = Game.new(@player1.name, @player2.name)
       perform(my_game)

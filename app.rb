@@ -2,38 +2,43 @@ require 'bundler'
 Bundler.require
 
 $:.unshift File.expand_path("./../lib", __FILE__)
-require 'app/game'
-require 'app/board'
-require 'app/human_player'
+require 'game'
+require 'board'
+require 'human_player'
 
-puts "-------------------------------------------------
-|Bienvenue sur 'MORPION X VS O' !               |
-|Le but du jeu est d'être le dernier survivant !|
--------------------------------------------------"
+def introduction
+  puts "  -------------------------------------------------
+  |Bienvenue sur 'MORPION X VS O' !               |
+  |Le but du jeu est d'être le dernier survivant !|
+  -------------------------------------------------".light_green
 
-# demande le nom de chaque joueur
-puts "
-Initialisation des joueurs :
-Comment s'appelle le Joueur 1 (qui va jouer en 1er) ?"
-print "> "
-player1 = gets.chomp
-puts "Comment s'appelle le Joueur 2 ?"
-print "> "
-player2 = gets.chomp
-puts "_________________________"
-puts "Lancement de la partie"
-sleep(1)
-print "."
-sleep(1)
-print "."
-sleep(1)
-print "."
-sleep(1)
+  # demande le nom de chaque joueur
+  puts "
+  Initialisation des joueurs :
+  Comment s'appelle le Joueur 1 (qui va jouer en 1er) ?"
+  print "> "
+  player1 = gets.chomp
+  puts "Comment s'appelle le Joueur 2 ?"
+  print "> "
+  player2 = gets.chomp
 
-# initialisation du jeu
-my_game = Game.new(player1, player2)
+  # initialisation du jeu
+  my_game = Game.new(player1, player2)
+  perform(my_game)
 
-# le jeu tourne
+  # petit effet de style (chargement)
+  puts "_________________________"
+  puts "Lancement de la partie"
+  sleep(1)
+  print "."
+  sleep(1)
+  print "."
+  sleep(1)
+  print "."
+  sleep(1)
+end
+
+# méthode qui fait tourner le jeu
 def perform(my_game)
   round = 1
   while round <= 9
@@ -45,4 +50,4 @@ def perform(my_game)
   my_game.end_game("match_nul")
 end
 
-perform(my_game)
+introduction
